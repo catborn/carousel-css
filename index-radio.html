@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Чистая CSS карусель</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      padding: 30px;
+      margin: 20px 0;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #2c3e50;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .carousel-container {
+      position: relative;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      height: 350px;
+    }
+
+    .carousel {
+      display: flex;
+      width: 400%;
+      height: 100%;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+      width: 25%;
+      padding: 40px;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .carousel-item:nth-child(1) {
+      background-color: #f9f9f9;
+    }
+
+    .carousel-item:nth-child(2) {
+      background-color: #e3f2fd;
+    }
+
+    .carousel-item:nth-child(3) {
+      background-color: #ffecb3;
+    }
+
+    .carousel-item:nth-child(4) {
+      background-color: #c8e6c9;
+    }
+
+    .carousel-item h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #3498db;
+    }
+
+    .carousel-item p {
+      font-size: 1.1rem;
+      text-align: center;
+      line-height: 1.6;
+      color: #555;
+      max-width: 80%;
+    }
+
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      gap: 15px;
+    }
+
+    .control-button {
+      display: inline-block;
+      background-color: #3498db;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-decoration: none;
+    }
+
+    .control-button:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 12px;
+    }
+
+    .nav-button {
+      display: none;
+    }
+
+    .nav-label {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background-color: #bbb;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #slide1:checked~.carousel-container .carousel {
+      transform: translateX(0);
+    }
+
+    #slide2:checked~.carousel-container .carousel {
+      transform: translateX(-25%);
+    }
+
+    #slide3:checked~.carousel-container .carousel {
+      transform: translateX(-50%);
+    }
+
+    #slide4:checked~.carousel-container .carousel {
+      transform: translateX(-75%);
+    }
+
+    #slide1:checked~.carousel-nav label[for="slide1"],
+    #slide2:checked~.carousel-nav label[for="slide2"],
+    #slide3:checked~.carousel-nav label[for="slide3"],
+    #slide4:checked~.carousel-nav label[for="slide4"] {
+      background-color: #3498db;
+      transform: scale(1.2);
+    }
+
+    .explanation {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 25px;
+      margin-top: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .explanation h2 {
+      color: #2c3e50;
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+    }
+
+    .explanation p {
+      line-height: 1.6;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    .highlight {
+      background-color: #fff8e1;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .carousel-item {
+        padding: 30px 20px;
+      }
+
+      .carousel-item h2 {
+        font-size: 1.6rem;
+      }
+
+      .carousel-item p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Чистая CSS карусель</h1>
+
+    <input type="radio" name="slider" id="slide1" class="nav-button" checked>
+    <input type="radio" name="slider" id="slide2" class="nav-button">
+    <input type="radio" name="slider" id="slide3" class="nav-button">
+    <input type="radio" name="slider" id="slide4" class="nav-button">
+
+    <div class="carousel-container">
+      <div class="carousel">
+        <div class="carousel-item">
+          <h2>Страница 1</h2>
+          <p>Это первая страница карусели, созданной с использованием только HTML и CSS.</p>
+        </div>
+        <div class="carousel-item">
+          <h2>Страница 2</h2>
+          <p>Вторая страница демонстрирует плавные переходы и адаптивный дизайн.</p>
+        </div>
+        <div class="carousel-item">
+          <h2>Страница 3</h2>
+          <p>Третья страница показывает, как можно создать карусель без JavaScript.</p>
+        </div>
+        <div class="carousel-item">
+          <h2>Страница 4</h2>
+          <p>Четвертая страница завершает нашу карусель. Попробуйте переключаться между страницами!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-nav">
+      <label for="slide1" class="nav-label"></label>
+      <label for="slide2" class="nav-label"></label>
+      <label for="slide3" class="nav-label"></label>
+      <label for="slide4" class="nav-label"></label>
+    </div>
+
+    <div class="carousel-controls">
+      <label for="slide1" class="control-button">1</label>
+      <label for="slide2" class="control-button">2</label>
+      <label for="slide3" class="control-button">3</label>
+      <label for="slide4" class="control-button">4</label>
+    </div>
+  </div>
+
+  <div class="container explanation">
+    <h2>Как работает чистая CSS карусель?</h2>
+    <p>Эта карусель создана без использования JavaScript. Вместо этого применяются:</p>
+    <ul>
+      <li>Радиокнопки для переключения между слайдами</li>
+      <li>CSS-селектор <span class="highlight">:checked</span> для определения активного слайда</li>
+      <li>CSS-свойство <span class="highlight">transform: translateX()</span> для перемещения карусели</li>
+      <li>CSS-переходы для плавной анимации</li>
+      <li>Элементы <span class="highlight">label</span> в качестве кнопок навигации</li>
+    </ul>
+    <p>Такой подход обеспечивает полную функциональность без JavaScript и работает во всех современных браузерах.</p>
+  </div>
+</body>
+
+</html>
