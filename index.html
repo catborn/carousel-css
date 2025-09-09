@@ -49,6 +49,57 @@
     li {
       scroll-snap-align: center;
     }
+
+    /* scroll buttons */
+    ul::scroll-button(*) {
+      border: 0;
+      font-size: 2rem;
+      background: none;
+      color: black;
+      opacity: 0.7;
+      cursor: pointer;
+    }
+
+    ul::scroll-button(*):hover,
+    ul::scroll-button(*):focus {
+      opacity: 1;
+    }
+
+    ul::scroll-button(*):active {
+      translate: 1px 1px;
+    }
+
+    ul::scroll-button(*):disabled {
+      opacity: 0.2;
+      cursor: unset;
+    }
+
+    ul::scroll-button(left) {
+      content: "◄";
+    }
+
+    ul::scroll-button(right) {
+      content: "►";
+    }
+
+    ul {
+      anchor-name: --my-carousel;
+    }
+
+    ul::scroll-button(*) {
+      position: absolute;
+      position-anchor: --my-carousel;
+    }
+
+    ul::scroll-button(left) {
+      right: calc(anchor(left) - 70px);
+      bottom: calc(anchor(top) + 13px);
+    }
+
+    ul::scroll-button(right) {
+      left: calc(anchor(right) - 70px);
+      bottom: calc(anchor(top) + 13px);
+    }
   </style>
 </head>
 
