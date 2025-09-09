@@ -100,6 +100,35 @@
       left: calc(anchor(right) - 70px);
       bottom: calc(anchor(top) + 13px);
     }
+
+    /* scroll marker */
+    ul {
+      scroll-marker-group: after;
+    }
+
+    ul::scroll-marker-group {
+      position: absolute;
+      position-anchor: --my-carousel;
+      top: calc(anchor(bottom) - 70px);
+      justify-self: anchor-center;
+
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    li::scroll-marker {
+      content: "";
+      width: 16px;
+      height: 16px;
+      background-color: transparent;
+      border: 2px solid black;
+      border-radius: 50%;
+    }
+
+    li::scroll-marker:target-current {
+      background-color: black;
+    }
   </style>
 </head>
 
